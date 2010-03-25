@@ -1,0 +1,82 @@
+h2. Hoptoad2db
+
+I love hoptoad. Currently I am working on a government project and hoptoad can not be used.  Rather than writing code that captures all the information about exception, I am letting hoptoad_notifier to do all the heavy lifting.
+
+However instead of sending the information to hoptoad this plugin ensures that information is written to a database.
+
+h2. Installing the plugin
+
+Open <tt>config/environment.rb</tt> and add following line.
+
+<pre>
+config.gem 'hoptoad_notifier'
+</pre>
+
+Install hoptoad_notifier gem by executing 
+<pre>sudo rake gems:install</pre> 
+
+Install hoptoad2db plugin <pre>ruby script/plugin install git://github.com/neerajdotname/hoptoad2db.git</pre>
+
+Create an empty hoptoad.rb file <pre>touch config/initializers/hoptoad.rb</pre> 
+
+Add following text to <tt>config/initializers/hoptoad.rb</tt> file
+
+<pre>
+HoptoadNotifier.configure do |config|
+  config.api_key = 'some_random_characters'
+end
+
+module HoptoadNotifier
+  def self.send_notice(data)
+    Exception2db.create(:exception => data.to_xml)
+  end
+end
+</pre>
+
+Generate migration <pre>ruby script/generate migration add_exception2db_table</pre> 
+
+Open the migration file and add following text
+
+<pre>
+class AddException2dbTable < ActiveRecord::Migration
+  
+  def self.up
+    create_table :exception2dbs do |t|
+      t.text :exception
+
+      t.timestamps
+    end
+  end
+
+  def self.down
+    drop_table :exception2dbs
+  end
+
+end
+</pre>
+
+Run migration <pre>rake db:migrate</pre> 
+
+
+h2. How to use it
+
+Whenever there is an exception that exception will be logged to database. Remember all the hoptoad rules apply. It means no excpetion will be logged in development environment.
+
+To view exceptions visit "http://localhost:3000/exception2db":http://localhost:3000/exception2db .
+
+In order to test this feature start server in production mode, create some exception and then visit "http://localhost:3000/exception2db":http://localhost:3000/exception2db .
+
+h2. Configuring security
+
+By default no security check is performed while visiting "http://localhost:3000/exception2db":http://localhost:3000/exception2db in development mode. In other environment a security check is done. At the bottom of <tt>config/initializers/hoptoad.rb</tt> add something like this to configure security settings.
+
+<pre>
+Exception2dbConfig.set = {
+  :is_allowed_to_view => lambda {|controller| controller.send('admin_logged_in?') }
+}
+</pre>
+
+Above code assumes that you have <tt>admin_logged_in?</tt> method defined in <tt>application_controller.rb</tt> . The <tt>is_allowed_to_view</tt> key accepts a proc and controller is provided to you. So you can call any controller method.
+
+
+Copyright (c) 2010 neerajdotname, released under the MIT license

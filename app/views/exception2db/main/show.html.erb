@@ -1,0 +1,181 @@
+<div id="neg_margin_wrap" class="clearfix">
+
+  <div id="main_footer_wrap">
+    <div id="main" class="clearfix">
+      <div class="main_top clearfix">
+        <div class="main_top_content  clearfix">
+        </div>
+      </div>
+      <div class="main_content">
+        <div class="main_content_inner">
+          <div id="notice_heading">
+            <ul id="subnav" class="clearfix">
+              <li class='active'><a href="#summary"><span>Summary</span></a></li>
+              <li><a href="#backtrace"><span>Backtrace</span></a></li>
+              <li><a href="#environment"><span>Environment</span></a></li>
+              <li><a href="#parameters"><span>Parameters</span></a></li>
+              <!-- <li><a href="#similar"><span>Similar Errors (1)</span></a></li> -->
+            </ul>
+          </div><!-- #notice_heading -->
+
+          <ul id="notice-nav" class="">
+            <span class="unresolved"></span>
+          </ul>
+
+          <div id="summary">
+            <table class="summary">
+              <tr>
+                <th>Error</th>
+                <td class="error_message">
+                  <%=REXML::XPath.first(@doc, '//notice/error/message/text()')%>
+                </td>
+              </tr>
+              <tr>
+                <th>Action</th>
+                <td>
+                  <%=REXML::XPath.first(@doc, '//notice/request/component/text()')%>
+                  #
+                  <%=REXML::XPath.first(@doc, '//notice/request/action/text()')%>
+                </td>
+              </tr>
+              <tr>
+                <th>URL</th>
+                <td class="url">
+                  <% url = REXML::XPath.first(@doc, '//notice/request/url/text()').to_s%>
+                  <%=link_to(url, url)%>
+                </td>
+              </tr>
+            </table>
+
+            <table class="summary_secundus">
+              <tr>
+                <th>
+                  Parameters
+                </th>
+                <td>
+                  <pre class="truncated">
+                    <%= @parameters %>
+                  </pre>
+                </td>
+              </tr>
+              <tr>
+                <th>File</th>
+                <td>
+                  <% elem = REXML::XPath.match(@doc, '//notice/error/backtrace/line').first %>
+                  <%=elem.attributes['file']%>:<%=elem.attributes['number']%>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+
+          <div id="backtrace" style='display:none;'>
+            <pre>
+              <%
+                elements = REXML::XPath.match(@doc, '//notice/error/backtrace/line')
+                backtrace = elements.inject('') do |sum, elem| 
+                  sum << '<p>'
+                  sum << elem.attributes['file']
+                  sum << ':'
+                  sum << elem.attributes['number']
+                  sum << ':in '
+                  sum << elem.attributes['method']
+                  sum << '</p>'
+                end
+              %>
+              <%=backtrace%>
+            </pre>
+          </div>
+
+          <div id="environment" style='display:none;'>
+            <table class="notice">
+              <% @cgi_data.each_pair do |key,value| %>
+                <tr>
+                    <td><%=key%></td>
+                    <td>
+                      <div class="object">
+                        <%=value%>
+                      </div>
+                    </td>
+                  </tr>
+              <% end %>
+            </table>
+          </div>
+          <div id="parameters" style="display: none;">
+            <pre class="truncated">
+              <%= @parameters %>
+            </pre>
+          </div>
+          <div id="similar" style="display: none;">
+            <table id="notices">
+              <tr>
+                <th>Where</th>
+                <th>Message</th>
+                <th>When</th>
+              </tr>
+              <tr class="rails-env-production">
+                <td></td>
+                <td class="message">
+                  <%=REXML::XPath.first(@doc, '//notice/error/message/text()')%>
+                </td>
+                <td>
+                  <% tmp = @record.created_at.strftime('%B %d, %Y %I:%M:%S %p') %>
+                  <span class='timestamp' title='<%=tmp%>' rel='%B %d, %Y at %I:%M:%S %p'>
+                    <%=tmp%>
+                  </span>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="bottom_right_shadow">
+      </div>
+    </div><!-- #main -->
+  </div><!-- #main_footer_wrap -->
+</div><!-- #neg_margin_wrap -->
+
+<div id="main_sidebar" class="main_sidebar clearfix">
+  <div class="main_top clearfix">
+    <div class="main_top_content  clearfix">
+      <h4>
+      </h4>
+    </div>
+  </div>
+  <div class="main_content">
+    <div class="main_content_inner">
+      <dl class="sidebar_section">
+        <dt>Rails environment</dt>
+        <dd>
+          <%=REXML::XPath.first(@doc, '//notice/server-environment/environment-name/text()')%>
+        </dd>
+        <dt>User Agent</dt>
+        <dd>
+          <%= @agent %>
+        </dd>
+        <dt>Received at</dt>
+        <dd>
+          <% tmp = @record.created_at.strftime('%B %d, %Y %I:%M:%S %p') %>
+          <span class='timestamp' title='<%=tmp%>' rel='%B %d, %Y at %I:%M:%S %p'>
+            <%=tmp%>
+          </span>          
+        </dd>
+<!--              
+        <dt>Similar Errors</dt>
+        <dd>
+          Occurred 1 time
+          <div class="pagination">
+            <span class="first_page disabled">&laquo; First</span>
+            <span class="previous_page disabled">&lsaquo; Previous</span>
+            <span class="next_page disabled">Next &rsaquo;</span>
+            <span class="last_page disabled">Last &raquo;</span>
+          </div>
+        </dd>
+-->             
+      </dl>
+    </div>
+  </div>
+  <div class="bottom_right_shadow">
+  </div>
+</div><!-- #main -->
+

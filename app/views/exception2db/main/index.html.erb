@@ -1,0 +1,24 @@
+<div id="neg_margin_wrap" class="clearfix">
+  <div id="main_footer_wrap">
+    <div id="main" class="clearfix">
+      <div class="main_content">
+        <div class="main_content_inner">
+          <table class='groups'>
+            <% 
+              @exception2dbs.each do |exception2db| 
+                @doc = REXML::Document.new(exception2db.exception)
+            %>
+              <tr>
+                <td class='message'>
+                  <%= exception2db.created_at.strftime('%B %d, %Y %I:%M:%S %p') %>
+                  <%= link_to REXML::XPath.first(@doc, '//notice/error/message/text()'), "/exception2db/#{exception2db.id}" %>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+          <%= will_paginate @exception2dbs %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
