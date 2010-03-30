@@ -1,8 +1,10 @@
-h2. Hoptoad2db
+h2. Exception2db
 
-I love hoptoad. Currently I am working on a government project and hoptoad can not be used.  Rather than writing code that captures all the information about exception, I am letting hoptoad_notifier to do all the heavy lifting.
+I love hoptoad and I esepecially like the ability to catch an exception in a rake task and to send that exception info to hoptoad using hoptoad_notifier. 
 
-However instead of sending the information to hoptoad this plugin ensures that information is written to a database.
+Currently I am working on a government project and hoptoad can not be used.  Rather than writing code that captures all the information about exception, I am letting hoptoad_notifier to do all the heavy lifting.
+
+Instead of sending the information to hoptoad this plugin ensures that information is written to a database.
 
 h2. Installing the plugin
 
@@ -15,11 +17,11 @@ config.gem 'hoptoad_notifier'
 Install hoptoad_notifier gem by executing 
 <pre>sudo rake gems:install</pre> 
 
-Install hoptoad2db plugin <pre>ruby script/plugin install git://github.com/neerajdotname/hoptoad2db.git</pre>
+Install exception2db plugin <pre>ruby script/plugin install git://github.com/neerajdotname/exception2db.git</pre>
 
-Create an empty hoptoad.rb file <pre>touch config/initializers/hoptoad.rb</pre> 
+Create an empty exception2db.rb file <pre>touch config/initializers/exception2db.rb</pre> 
 
-Add following text to <tt>config/initializers/hoptoad.rb</tt> file
+Add following text to <tt>config/initializers/exception2db.rb</tt> file
 
 <pre>
 HoptoadNotifier.configure do |config|

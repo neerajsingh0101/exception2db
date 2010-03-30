@@ -9,33 +9,20 @@
     <%= Exception2db::Util.javascript_include_tag('app')%>
   </head>
 
-  <body class="groups groups-show ">
-    <div id="header" class="clearfix">
-      <div id="lilypad"></div>
+  <body>
+    <div id="header">
       <h1><a href="/exception2db">exception2db</a></h1>
-
-      <ul id="session">
-        <li id="user">
-        </li>
-        <li id="destroy_session">
-        </li>
-      </ul>
-
-      <ul id="navigation">
-        <li id="errors" class="errors">
-        </li>
-      </ul>
-
     </div>
 
-    <div id="content" class="clearfix">
-      <%= yield %>
-    </div><!-- #content -->
-
-    <div id="footer" class="clearfix">
-      <div class="service">
+    <div id='container'>
+      <div id='wrapper'>
+        <%= yield %>
+      </div>
+      <div id="footer">
         <a href="">exception2db</a> 
       </div>
     </div>
+
   </body>
+
 </html>
