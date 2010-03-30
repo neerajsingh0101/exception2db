@@ -17,6 +17,8 @@ config.gem 'hoptoad_notifier'
 Install hoptoad_notifier gem by executing 
 <pre>sudo rake gems:install</pre> 
 
+vendor gem by executing <tt>rake gems:unpack GEM=hoptoad_notifier</tt> .
+
 Install exception2db plugin <pre>ruby script/plugin install git://github.com/neerajdotname/exception2db.git</pre>
 
 Create an empty exception2db.rb file <pre>touch config/initializers/exception2db.rb</pre> 
