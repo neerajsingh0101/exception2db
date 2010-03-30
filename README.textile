@@ -27,7 +27,6 @@ Add following text to <tt>config/initializers/exception2db.rb</tt> file
 
 <pre>
 HoptoadNotifier.configure do |config|
-  config.api_key = 'some_random_characters'
 end
 
 module HoptoadNotifier
