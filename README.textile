@@ -66,7 +66,19 @@ Whenever there is an exception that exception will be logged to database. Rememb
 
 To view exceptions visit "http://localhost:3000/exception2db":http://localhost:3000/exception2db .
 
-In order to test this feature start server in production mode, create some exception and then visit "http://localhost:3000/exception2db":http://localhost:3000/exception2db .
+In order to test this feature first add following line in <tt>application_controller.rb</tt> .
+
+<pre>
+def local_request?
+ false
+end
+</pre>
+
+Then start the server in production mode.
+
+Go to a url that raises exception.
+
+Then visit "http://localhost:3000/exception2db":http://localhost:3000/exception2db .
 
 h2. Configuring security
 

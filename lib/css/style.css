@@ -75,7 +75,6 @@ body {
   margin-top: 0px;
   margin:0; 
   background: #ddd;
-  float: left;
   width: 100%;
   font-size: 20px;
 }
@@ -84,7 +83,6 @@ body {
   margin: 0;
   padding: 10px 0;  
   font-size: 40px;
-  float: left;
   padding: 15px 45px 15px 10px;
   font-style: normal;
   font-weight: bold;
@@ -99,3 +97,59 @@ body {
   font-family: "Helvetica Neue Light","HelveticaNeue-Light","Helvetica Neue",Calibri,Helvetica,Arial;
   color: #000;
 }
+
+table {
+  font-size: 18px;
+}
+
+table tr, table tr td {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #eee;
+}
+
+.pagination {
+  margin: 20px;
+  font-size: 16px;
+}
+
+#footer {
+  margin: 40px 0 0 0;
+  padding: 10px 0 10px 40px;
+  height: 30px;
+  background: #ddd;
+
+}
+
+#subnav {
+  margin: 20px 10px;
+}
+
+#subnav li {
+  display: inline;
+  margin-top: 20px;
+  padding: 10px;
+  color: #000;
+}
+
+#subnav li a {
+  color: black;
+  font-size: 18px;
+  padding: 4px;
+}
+
+#subnav li a:hover {
+  background: #888;
+  padding: 4px;
+  color: #fff;
+  text-decoration: none;
+}
+
+#subnav li.active a {
+  background: #888;
+  padding: 4px;
+  color: #fff;
+  text-decoration: none;
+}
+
+
