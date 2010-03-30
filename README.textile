@@ -84,7 +84,7 @@ Then visit "http://localhost:3000/exception2db":http://localhost:3000/exception2
 
 h2. Configuring security
 
-By default no security check is performed while visiting "http://localhost:3000/exception2db":http://localhost:3000/exception2db in development mode. In other environment a security check is done. At the bottom of <tt>config/initializers/hoptoad.rb</tt> add something like this to configure security settings.
+By default no security check is performed while visiting "http://localhost:3000/exception2db":http://localhost:3000/exception2db in development mode. In other environment a security check is done. At the bottom of <tt>config/initializers/exception2db.rb</tt> add something like this to configure security settings.
 
 <pre>
 Exception2dbConfig.set = {
