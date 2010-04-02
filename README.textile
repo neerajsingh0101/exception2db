@@ -2,9 +2,11 @@ h2. Exception2db
 
 I love hoptoad. I especially like the ability to catch an exception in rake task and to send that exception to hoptoad using hoptoad_notifier. 
 
-Currently I am working on a government project where hoptoad can not be used. Rather than writing code that captures all the information about exception, I am letting hoptoad_notifier do all the heavy lifting.
+Currently I am working on a government project where hoptoad can't be used. Rather than writing code that captures all the information about exception, I am letting hoptoad_notifier do all the heavy lifting.
 
 Instead of sending the information to hoptoad this plugin ensures that information is written to a database.
+
+This plugin has been tested with Rails 2.3.5 .
 
 h2. Installing the plugin
 
