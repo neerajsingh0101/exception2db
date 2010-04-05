@@ -1,6 +1,6 @@
 h2. Exception2db
 
-I love hoptoad. I especially like the ability to catch an exception in rake task and to send that exception to hoptoad using hoptoad_notifier. 
+I love hoptoad. I especially like the ability to catch exceptions in rake tasks and have those exceptions logged at hoptoad using hoptoad_notifier.
 
 Currently I am working on a government project where hoptoad can't be used. Rather than writing code that captures all the information about exception, I am letting hoptoad_notifier do all the heavy lifting.
 
