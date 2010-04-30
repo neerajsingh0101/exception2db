@@ -1,5 +1,4 @@
 <div>
-
     <ul id="subnav">
       <li class='active'><a href="#detailed"><span>Detailed Info</span></a></li>
       <li><a href="#backtrace"><span>Backtrace</span></a></li>
@@ -7,114 +6,95 @@
       <li><a href="#parameters"><span>Parameters</span></a></li>
     </ul>
 
-          <div id="detailed">
-            <table>
-              <tr>
-                <th>Error</th>
-                <td class="error_message">
-                  <%=REXML::XPath.first(@doc, '//notice/error/message/text()')%>
-                </td>
-              </tr>
-              <tr>
-                <th>Action</th>
-                <td>
-                  <%=REXML::XPath.first(@doc, '//notice/request/component/text()')%>
-                  #
-                  <%=REXML::XPath.first(@doc, '//notice/request/action/text()')%>
-                </td>
-              </tr>
+    <div id="detailed">
+      <table>
+        <tr>
+          <th>Error</th>
+          <td class="error_message">
+            <%= @record.error_message %>
+          </td>
+        </tr>
+        <tr>
+          <th>Action</th>
+          <td>
+            <%= @record.controller %>#<%= @record.action %>
+          </td>
+        </tr>
 
-              <tr>
-                <th>URL</th>
-                <td>
-                  <% url = REXML::XPath.first(@doc, '//notice/request/url/text()').to_s%>
-                  <%=link_to(url, url)%>
-                </td>
-              </tr>
+        <tr>
+          <th>URL</th>
+          <td>
+            <%=link_to(@record.url, @record.url)%>
+          </td>
+        </tr>
 
-              <tr>
-                <th>Rails environment</th>
-                <td>
-                  <%=REXML::XPath.first(@doc, '//notice/server-environment/environment-name/text()')%>
-                </td>
-              </tr>
+        <tr>
+          <th>Rails environment</th>
+          <td>
+            <%= @record.environment %>
+          </td>
+        </tr>
 
-              <tr>
-                <th>User Agent</th>
-                <td>
-                  <%=@agent%>
-                </td>
-              </tr>
+        <tr>
+          <th>User Agent</th>
+          <td>
+            <%= @record.user_agent %>
+          </td>
+        </tr>
 
-              <tr>
-                <th>Received at</th>
-                <td>
-                  <% tmp = @record.created_at.strftime('%B %d, %Y %I:%M:%S %p') %>
-                  <%=tmp%>
-                </td>
-              </tr>
+        <tr>
+          <th>Received at</th>
+          <td>
+            <%= @record.created_at.strftime('%B %d, %Y %I:%M:%S %p') %>
+          </td>
+        </tr>
 
 
-              <tr>
-                <th>
-                  Parameters
-                </th>
-                <td>
-                  <pre class="truncated">
-                    <%= @parameters %>
-                  </pre>
-                </td>
-              </tr>
-              <tr>
-                <th>File</th>
-                <td>
-                  <% elem = REXML::XPath.match(@doc, '//notice/error/backtrace/line').first %>
-                  <%=elem.attributes['file']%>:<%=elem.attributes['number']%>
-                </td>
-              </tr>
-            </table>
-          </div>
-
-
-          <div id="backtrace">
-            <pre>
-              <%
-                elements = REXML::XPath.match(@doc, '//notice/error/backtrace/line')
-                backtrace = elements.inject('') do |sum, elem| 
-                  sum << '<p>'
-                  sum << elem.attributes['file']
-                  sum << ':'
-                  sum << elem.attributes['number']
-                  sum << ':in '
-                  sum << elem.attributes['method']
-                  sum << '</p>'
-                end
-              %>
-              <%=backtrace%>
-            </pre>
-          </div>
-
-          <div id="environment">
-            <table class="notice">
-              <% @cgi_data.each_pair do |key,value| %>
-                <tr>
-                    <td><%=key%></td>
-                    <td>
-                      <div class="object">
-                        <%=value%>
-                      </div>
-                    </td>
-                  </tr>
-              <% end %>
-            </table>
-          </div>
-
-          <div id="parameters" style="display: none;">
+        <tr>
+          <th>
+            Parameters
+          </th>
+          <td>
             <pre class="truncated">
-              <%= @parameters %>
+              <%= @record.parameters %>
             </pre>
-          </div>
+          </td>
+        </tr>
+        <tr>
+          <th>File</th>
+          <td>
+            <%= @record.top_file_and_line_number %>
+          </td>
+        </tr>
+      </table>
+    </div>
 
 
+    <div id="backtrace">
+      <pre>
+        <%= @record.formatted_backtrace %>
+      </pre>
+    </div>
+
+    <div id="environment">
+      <table class="notice">
+        <% @record.cgi_data.each_pair do |key,value| %>
+          <tr>
+              <td><%=key%></td>
+              <td>
+                <div class="object">
+                  <%=value%>
+                </div>
+              </td>
+            </tr>
+        <% end %>
+      </table>
+    </div>
+
+    <div id="parameters" style="display: none;">
+      <pre class="truncated">
+        <%= @record.parameters %>
+      </pre>
+    </div>
 </div>
 

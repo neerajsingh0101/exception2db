@@ -15,23 +15,6 @@ class Exception2db::MainController < ApplicationController
 
   def show
     @record = Exception2db.find(params[:id])
-    @doc = REXML::Document.new(@record.exception)
-    @cgi_data = {}
-    REXML::XPath.each(@doc, '//notice/request/cgi-data/var') do |elem|
-      @cgi_data.store(elem.attributes['key'].to_s, elem.text)
-    end
-
-    @agent = REXML::XPath.first(@doc, '//notice/request/cgi-data/var[@key="HTTP_USER_AGENT"]').text
-
-    sum = []
-    elem = REXML::XPath.each(@doc, '//notice/request/params/var') do |elem|
-      item = ':' + elem.attributes['key'].to_s
-      item << ' => '
-      item << elem.text
-      sum << item
-    end
-    @parameters = '{ ' + sum.join(' , ') + ' }'
-
     respond_to do |format|
       format.html
     end
