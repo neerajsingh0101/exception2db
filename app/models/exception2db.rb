@@ -40,6 +40,7 @@ class Exception2db < ActiveRecord::Base
   end
   
   def action
+    #TODO code for both controller and action is same. fix it
     REXML::XPath.first(document, '//notice/request/component/text()').to_s
   end
   
