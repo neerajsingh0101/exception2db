@@ -53,9 +53,7 @@
             Parameters
           </th>
           <td>
-            <pre class="truncated">
-              <%= @record.parameters %>
-            </pre>
+            <%= @record.parameters %>
           </td>
         </tr>
         <tr>
@@ -67,16 +65,10 @@
       </table>
     </div>
 
-
-    <div id="backtrace">
-      <pre>
-        <%= @record.formatted_backtrace %>
-      </pre>
-    </div>
-
+    <br />
     <div id="environment">
       <table class="notice">
-        <% @record.cgi_data.each_pair do |key,value| %>
+        <%  @record.cgi_data.each_pair do |key,value| %>
           <tr>
               <td><%=key%></td>
               <td>
@@ -89,9 +81,9 @@
       </table>
     </div>
 
-    <div id="parameters" style="display: none;">
-      <pre class="truncated">
-        <%= @record.parameters %>
+    <div id="backtrace">
+      <pre>
+        <%= @record.formatted_backtrace %>
       </pre>
     </div>
 </div>
