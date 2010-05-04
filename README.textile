@@ -77,11 +77,14 @@ def local_request?
 end
 </pre>
 
-Then start the server in production mode.
+Then start the server in *non development* environment. Once again please start your server in production
+or some other environment. Exceptions in development mode are ignored by hoptoad. 
 
 Go to a url that raises exception.
 
 Then visit "http://localhost:3000/exception2db":http://localhost:3000/exception2db .
+
+If you are not seeing the logging of exception then please read "this article":http://neeraj.name/2010/04/23/I-am-not-seeing-hoptoad-messages.html .
 
 h2. Configuring security
 
