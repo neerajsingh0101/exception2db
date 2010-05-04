@@ -6,7 +6,7 @@ class Exception2db < ActiveRecord::Base
   def cgi_data
     data = {}
     REXML::XPath.each(document, '//notice/request/cgi-data/var') do |elem|
-      cgi_data.store(elem.attributes['key'].to_s, elem.text)
+      data.store(elem.attributes['key'].to_s, elem.text)
     end
     data
   end
