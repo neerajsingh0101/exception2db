@@ -14,9 +14,9 @@ class Exception2dbConfig
     self.setting = {
       :plugin_dir => File.expand_path(File.join(File.dirname(__FILE__), '..', '..')),
       :will_paginate_per_page => 50,
-      :is_allowed_to_view => lambda { |controller| return true if Rails.env.development? }
+      # cucumber test was failing with Rails.env.development? . Need to investigate further TODO
+      :is_allowed_to_view => lambda { |controller| return true if RAILS_ENV == 'development' }
     }
   end
-
 
 end

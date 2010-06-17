@@ -1,0 +1,14 @@
+development:
+  adapter: sqlite3
+  database: ":memory:"
+  #database: db/sqlite3.db
+  #:dbfile: ":memory:"
+
+test:
+  :adapter: sqlite3
+  database: ":memory:"
+
+cucumber:
+  :adapter: sqlite3
+  database: ":memory:"
+

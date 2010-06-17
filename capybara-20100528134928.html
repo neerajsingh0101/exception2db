@@ -1,0 +1,734 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>excption2db  </title>  
+  <style type='text/css'>/*-------------------------------------------------
+RESET
+-------------------------------------------------*/
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { 
+	margin:0;
+	padding:0;
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+fieldset,img {border:0;}
+address,caption,cite,code,dfn,th,var {
+	font-style:normal;
+	font-weight:normal;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-size:100%;
+	font-weight:normal;
+}
+
+ol,ul {list-style:none;}
+caption,th {text-align:left;}
+q:before,q:after {content:'';}
+abbr,acronym {border:0;}
+
+img {border: none;}
+em em {font-style: normal;}
+
+/*-------------------------------------------------
+Defaults
+-------------------------------------------------*/
+
+acronym, abbr {
+  font-variant: small-caps; 
+  text-transform: lowercase; 
+  font-weight: bold;
+}
+
+.center {text-align: center;}	
+.large {font-size: larger;}	
+.small {font-size: smaller;}
+strong {font-weight: bold;}
+em {font-style: italic;}
+
+.clear {clear: both;}				 
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }		 
+.clearfix { display: inline-block; }		 
+.clearfix{ display: block; }
+
+a {color: #888;}
+a:hover {color: #000;}
+
+/*-------------------------------------------------
+Layout
+-------------------------------------------------*/
+
+body {
+  font-family: "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  background: #e5e5e5; 
+  color: #333;   
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 21px;
+  text-align: left;
+}
+
+div#container {
+  margin: 2% 4%;
+  padding: 25px;
+  background: #fff;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 15px rgba(00,00,00,0.5);
+  -moz-box-shadow: 0px 0px 15px rgba(00,00,00,0.5);
+  -webkit-box-shadow: 0px 0px 15px rgba(00,00,00,0.5);
+}
+
+div#head {
+  margin: -25px -25px 0;
+  background: #111;
+  color: #999;
+  padding: 25px 25px 20px 15px;
+  -webkit-border-top-left-radius: 20px;
+  -webkit-border-top-right-radius: 20px;
+  -moz-border-radius-topleft: 20px;
+  -moz-border-radius-topright: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  font-size: 18px;
+}
+
+div#head a {
+  color: #2fadcf;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+div#head span.home {
+  -webkit-border-top-left-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background: #333;
+  padding: 8px 6px 8px 12px;
+  margin-right: 1px;
+}
+
+div#head span.locale {
+  color: #fff;
+  font-weight: bold;
+  background: #444;
+  padding: 8px 12px 8px 6px;
+  -webkit-border-top-right-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+  -moz-border-radius-topright: 10px;
+  -moz-border-radius-bottomright: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+div#head span.locale.empty {
+  background: #333;
+  padding-left: 0;
+  margin-left: -6px;
+}
+
+div#head span.locale em {
+  font-style: normal;
+  font-weight: normal;
+}
+
+div#head span.note {
+  color: #777;
+  font-size: 13px;
+  font-weight: normal;
+  margin-left: 10px;
+}
+
+h2,
+h3 {
+  font-size: 18px;
+  color: #2fadcf;
+  margin: 25px 0 10px;
+}
+
+h2 span,
+h3 span {
+  font-size: 13px;
+  color: #888;
+}
+
+ul.locales {
+  margin: 25px 0;
+}
+
+ul.locales li {
+  /*width: 230px;*/
+  width: 150px;
+  display: block;
+  float: left;
+  margin: 0 10px 10px 0;
+ /* background: #fff;
+   -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;
+   border: 1px solid #e5e5e5;
+   padding: 5px 10px;*/
+}
+
+ul.locales a {
+  font-weight: bold;
+  text-decoration: underline;
+  color: #2fadcf;
+}
+
+/*ul.locales li:hover {
+  background: #f5f5f5;
+  border-color: #ccc;
+}*/
+
+ul.locales span.missing_translations {
+  color: #fff;
+  font-weight: bold;
+  background: #c00;
+  font-size: 9px;
+  padding: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  line-height: 9px;
+  vertical-align: top;
+  display: inline-block;
+}
+
+ul.locales span {
+  font-size: 13px;
+  color: #666;
+}
+
+div.submit {
+  background: #f5f5f5;
+  margin: 25px -25px -25px;
+  padding: 15px 25px;
+  border-top: 1px dashed #ccc;
+  -webkit-border-bottom-right-radius: 20px;
+  -webkit-border-bottom-left-radius: 20px;
+  -moz-border-radius-bottomright: 20px;
+  -moz-border-radius-bottomleft: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+span.updated {
+  font-size: 11px;
+  padding: 1px;
+  background: #ffc;
+  color: #777;
+  margin-bottom: 10px;
+  float: right;
+}
+
+div.table_submit {
+  background: #f5f5f5;
+  margin: -25px 0 0;
+  padding: 12px 15px 15px;
+  text-align: left;
+}
+
+div.translations {
+  width: 96%;
+  text-align: center;
+}
+
+span.notice {
+  background: #ffc;
+  color: #666;
+  font-size: 12px;
+  padding: 2px 5px;
+  margin: -5px 0 15px;
+  display: inline-block;
+}
+
+div.original {
+  color: #999;
+  margin: 5px 0;
+  padding: 1px 8px 4px;
+}
+
+div.updated {
+  background: #ffc;
+  padding: 1px 8px 4px;
+}
+
+table.translations div.original span.key {
+  margin: 0 0 -2px;
+  padding: 0;
+}
+
+table.translations div.updated span.key {
+  margin: 0 0 -2px;
+  color: orange !important;
+  padding: 0;
+}
+
+/*-------------------------------------------------
+Translation tables
+-------------------------------------------------*/
+
+table.translations {
+  margin: 0 0 25px;
+  width: 100%;
+  text-align: left;
+}
+
+table.translations td,
+table.translations th {
+  font-size: 14px;
+  color: #222;
+  padding: 12px 8px;
+  border-bottom: 1px solid #e5e5e5;
+  vertical-align: top;
+  width: 50%;
+}
+
+table.translations th {
+  border-bottom-color: #bbb;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #999;
+  padding-bottom: 2px;
+}
+
+table.translations textarea.locale {
+  font-family: "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  font-size: 14px;
+  line-height: 21px;
+  color: #222;
+  padding: 1px;
+  width: 100%;
+  height: 42px;
+}
+
+table.translations span.key {
+  color: #aaa;
+  font-size: 9px;
+  display: block;
+}
+
+table.translations td.translation {
+  padding: 10px 8px;
+}
+
+table.translations tr.active td {
+  background: #edf9fe;
+}
+
+table.translations .highlight {
+  background-color: yellow;
+}
+
+/*-------------------------------------------------
+Pagination
+-------------------------------------------------*/
+
+div.paginate {
+  margin: 15px auto 20px;
+  font-size: 12px;
+  color: #777;
+}
+
+div.paginate a,
+div.paginate span {
+  padding: 2px 6px;
+  text-decoration: none;
+}
+
+div.paginate a:hover,
+div.paginate span.current {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background: #eee;
+  color: #333;
+}
+
+div.paginate .next_page,
+div.paginate .prev_page {
+ margin: 0 15px;
+ -webkit-border-radius: 5px;
+ -moz-border-radius: 5px;
+ border-radius: 5px;
+ border: 1px solid #bbb;
+ padding: 4px 8px;
+}
+
+div.paginate .disabled {
+  color: #ccc;
+  border-color: #eee;
+}
+
+/*-------------------------------------------------
+Custom Work
+-------------------------------------------------*/
+table.translations td.translation {
+  width:20%;
+}
+p#footer {
+  margin-top: 10px;
+}
+</style>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js" type="text/javascript"></script>
+  <script type="text/javascript">// currently empty
+</script>
+</head>
+
+<body>
+  <div id="container">
+    <div id="head">
+      <h1><span class="home"><a href="/Users/nsingh/dev/working/exception2db_demo/vendor/plugins/exception2db/test/rails_root/public/exception2db">exception2db</a></span></h1>
+    </div>
+    <table class='translations'>
+  <tr>
+    <td class='translation'>Error</td>
+    <td class="phrase">
+      RuntimeError: 46
+    </td>
+  </tr>
+
+  <tr>
+    <td class='translation'>Action</td>
+    <td class='phrase'>
+      exception2db/main#index
+    </td>
+  </tr>
+
+  <tr>
+    <td class='translation'>URL</td>
+    <td class='phrase'>
+      <a href="http://localhost:3000/exception2db">http://localhost:3000/exception2db</a>
+    </td>
+  </tr>
+
+  <tr>
+    <td class='translation'>Rails environment</td>
+    <td class='phrase'>
+      production
+    </td>
+  </tr>
+
+  <tr>
+    <td class='translation'>User Agent</td>
+    <td class='phrase'>
+      Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Chrome/5.0.375.38 Safari/533.4
+    </td>
+  </tr>
+
+  <tr>
+    <td class='translation'>Received at</td>
+    <td class='phrase'>
+      May 28, 2010 01:49:25 PM
+    </td>
+  </tr>
+
+  <tr>
+    <td class='translation'>
+      Parameters
+    </th>
+    <td class='phrase'>
+      { :action => index , :controller => exception2db/main }
+    </td>
+  </tr>
+
+  <tr>
+    <td class='translation'>File</td>
+    <td class='phrase'>
+      [PROJECT_ROOT]/vendor/plugins/exception2db/app/controllers/exception2db/main_controller.rb:10
+    </td>
+  </tr>
+</table>
+
+<br />
+
+<table class="translations">
+  
+    <tr>
+      <td class='translation'>HTTP_HOST</td>
+      <td class='phrase'>
+        localhost:3000
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>SERVER_NAME</td>
+      <td class='phrase'>
+        localhost
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>rack.session</td>
+      <td class='phrase'>
+        
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>HTTP_ACCEPT</td>
+      <td class='phrase'>
+        application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>REQUEST_PATH</td>
+      <td class='phrase'>
+        /exception2db
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>HTTP_USER_AGENT</td>
+      <td class='phrase'>
+        Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Chrome/5.0.375.38 Safari/533.4
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>rack.url_scheme</td>
+      <td class='phrase'>
+        http
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>HTTP_ACCEPT_LANGUAGE</td>
+      <td class='phrase'>
+        en-US,en;q=0.8
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>action_controller.request.request_parameters</td>
+      <td class='phrase'>
+        
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>SERVER_PROTOCOL</td>
+      <td class='phrase'>
+        HTTP/1.1
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>rack.errors</td>
+      <td class='phrase'>
+        #<IO:0x1001acb78>
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>rack.version</td>
+      <td class='phrase'>
+        10
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>SERVER_SOFTWARE</td>
+      <td class='phrase'>
+        Mongrel 1.1.5
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>REMOTE_ADDR</td>
+      <td class='phrase'>
+        127.0.0.1
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>PATH_INFO</td>
+      <td class='phrase'>
+        /exception2db
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>rack.run_once</td>
+      <td class='phrase'>
+        false
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>SCRIPT_NAME</td>
+      <td class='phrase'>
+        
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>rack.multithread</td>
+      <td class='phrase'>
+        false
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>HTTP_COOKIE</td>
+      <td class='phrase'>
+        _app_demo_session=BAh7BzoQX2NzcmZfdG9rZW4iMVVaUWdTdGhjWVg5MEVxSlJlaUFZNUhsRHlJaU11RjlSRWVrQ1VjbDdVV3M9Og9zZXNzaW9uX2lkIiVmY2M4Nzk2YWM2MzMwMGE2Zjc5YzgwNGJlNjVmNThiMQ%3D%3D--c3e438e8b20cbc2c650cc40d92101f30e23070b8; _exception2db_demo_session=BAh7BjoPc2Vzc2lvbl9pZCIlODc1NDJmZTNlMTg4YTc4NzMwNTY2YTU5Mjc3NjE3Nzg%3D--ad4cf6bade36ccd02b6c07f2e20839e211b81f5a
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>HTTP_VERSION</td>
+      <td class='phrase'>
+        HTTP/1.1
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>REQUEST_URI</td>
+      <td class='phrase'>
+        /exception2db
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>action_controller.request.path_parameters</td>
+      <td class='phrase'>
+        
+          
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>rack.multiprocess</td>
+      <td class='phrase'>
+        false
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>HTTP_ACCEPT_CHARSET</td>
+      <td class='phrase'>
+        ISO-8859-1,utf-8;q=0.7,*;q=0.3
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>rack.request.query_hash</td>
+      <td class='phrase'>
+        
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>SERVER_PORT</td>
+      <td class='phrase'>
+        3000
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>REQUEST_METHOD</td>
+      <td class='phrase'>
+        GET
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>rack.session.options</td>
+      <td class='phrase'>
+        
+        
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>action_controller.rescue.request</td>
+      <td class='phrase'>
+        #<ActionController::Request:0x103192518>
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>action_controller.request.query_parameters</td>
+      <td class='phrase'>
+        
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>rack.input</td>
+      <td class='phrase'>
+        #<StringIO:0x1031a6270>
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>HTTP_ACCEPT_ENCODING</td>
+      <td class='phrase'>
+        gzip,deflate
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>action_controller.rescue.response</td>
+      <td class='phrase'>
+        #<ActionController::Response:0x1031924c8>
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>rack.request.query_string</td>
+      <td class='phrase'>
+        
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>GATEWAY_INTERFACE</td>
+      <td class='phrase'>
+        CGI/1.2
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>HTTP_CONNECTION</td>
+      <td class='phrase'>
+        keep-alive
+      </td>
+    </tr>
+  
+    <tr>
+      <td class='translation'>QUERY_STRING</td>
+      <td class='phrase'>
+        
+      </td>
+    </tr>
+  
+</table>
+
+<pre>
+  <p>[PROJECT_ROOT]/vendor/plugins/exception2db/app/controllers/exception2db/main_controller.rb:10:in index</p><p>[GEM_ROOT]/gems/actionpack-2.3.5/lib/action_controller/base.rb:1331:in send</p><p>[GEM_ROOT]/gems/actionpack-2.3.5/lib/action_controller/base.rb:1331:in perform_action_without_filters</p><p>[GEM_ROOT]/gems/actionpack-2.3.5/lib/action_controller/filters.rb:617:in call_filters</p><p>[GEM_ROOT]/gems/actionpack-2.3.5/lib/action_controller/filters.rb:610:in perform_action_without_benchmark</p><p>[GEM_ROOT]/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:68:in perform_action_without_rescue</p><p>[GEM_ROOT]/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in ms</p><p>/usr/local/lib/ruby/1.8/benchmark.rb:308:in realtime</p><p>[GEM_ROOT]/gems/activesupport-2.3.5/lib/active_support/core_ext/benchmark.rb:17:in ms</p><p>[GEM_ROOT]/gems/actionpack-2.3.5/lib/action_controller/benchmarking.rb:68:in perform_action_without_rescue</p><p>[GEM_ROOT]/gems/actionpack-2.3.5/lib/action_controller/rescue.rb:160:in perform_action_without_flash</p><p>[GEM_ROOT]/gems/actionpack-2.3.5/lib/action_controller/flash.rb:146:in perform_action</p><p>[GEM_ROOT]/gems/actionpack-2.3.5/lib/action_controller/base.rb:532:in send</p><p>[GEM_ROOT]/gems/actionpack-2.3.5/lib/action_controller/base.rb:532:in process_without_filters</p><p>[GEM_ROOT]/gems/actionpack-2.3.5/lib/action_controller/filters.rb:606:in process</p><p>[GEM_ROOT]/gems/actionpack-2.3.5/lib/action_controller/base.rb:391:in process</p><p>[GEM_ROOT]/gems/actionpack-2.3.5/lib/action_controller/base.rb:386:in call</p><p>[GEM_ROOT]/gems/actionpack-2.3.5/lib/action_controller/routing/route_set.rb:437:in call</p><p>[GEM_ROOT]/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:87:in dispatch</p><p>[GEM_ROOT]/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:121:in _call</p><p>[GEM_ROOT]/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:130:in build_middleware_stack</p><p>[GEM_ROOT]/gems/activerecord-2.3.5/lib/active_record/query_cache.rb:29:in call</p><p>[GEM_ROOT]/gems/activerecord-2.3.5/lib/active_record/query_cache.rb:29:in call</p><p>[GEM_ROOT]/gems/activerecord-2.3.5/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in cache</p><p>[GEM_ROOT]/gems/activerecord-2.3.5/lib/active_record/query_cache.rb:9:in cache</p><p>[GEM_ROOT]/gems/activerecord-2.3.5/lib/active_record/query_cache.rb:28:in call</p><p>[GEM_ROOT]/gems/activerecord-2.3.5/lib/active_record/connection_adapters/abstract/connection_pool.rb:361:in call</p><p>[GEM_ROOT]/gems/actionpack-2.3.5/lib/action_controller/string_coercion.rb:25:in call</p><p>[GEM_ROOT]/gems/rack-1.0.1/lib/rack/head.rb:9:in call</p><p>[GEM_ROOT]/gems/rack-1.0.1/lib/rack/methodoverride.rb:24:in call</p><p>[GEM_ROOT]/gems/actionpack-2.3.5/lib/action_controller/params_parser.rb:15:in call</p><p>[GEM_ROOT]/gems/actionpack-2.3.5/lib/action_controller/session/cookie_store.rb:93:in call</p><p>[GEM_ROOT]/gems/actionpack-2.3.5/lib/action_controller/failsafe.rb:26:in call</p><p>[GEM_ROOT]/gems/rack-1.0.1/lib/rack/lock.rb:11:in call</p><p>[GEM_ROOT]/gems/rack-1.0.1/lib/rack/lock.rb:11:in synchronize</p><p>[GEM_ROOT]/gems/rack-1.0.1/lib/rack/lock.rb:11:in call</p><p>[GEM_ROOT]/gems/actionpack-2.3.5/lib/action_controller/dispatcher.rb:106:in call</p><p>[GEM_ROOT]/gems/rails-2.3.5/lib/rails/rack/static.rb:31:in call</p><p>[GEM_ROOT]/gems/rack-1.0.1/lib/rack/urlmap.rb:46:in call</p><p>[GEM_ROOT]/gems/rack-1.0.1/lib/rack/urlmap.rb:40:in each</p><p>[GEM_ROOT]/gems/rack-1.0.1/lib/rack/urlmap.rb:40:in call</p><p>[GEM_ROOT]/gems/rails-2.3.5/lib/rails/rack/log_tailer.rb:17:in call</p><p>[GEM_ROOT]/gems/rack-1.0.1/lib/rack/content_length.rb:13:in call</p><p>[GEM_ROOT]/gems/rack-1.0.1/lib/rack/chunked.rb:15:in call</p><p>[GEM_ROOT]/gems/rack-1.0.1/lib/rack/handler/mongrel.rb:64:in process</p><p>[GEM_ROOT]/gems/mongrel-1.1.5/lib/mongrel.rb:159:in process_client</p><p>[GEM_ROOT]/gems/mongrel-1.1.5/lib/mongrel.rb:158:in each</p><p>[GEM_ROOT]/gems/mongrel-1.1.5/lib/mongrel.rb:158:in process_client</p><p>[GEM_ROOT]/gems/mongrel-1.1.5/lib/mongrel.rb:285:in run</p><p>[GEM_ROOT]/gems/mongrel-1.1.5/lib/mongrel.rb:285:in initialize</p><p>[GEM_ROOT]/gems/mongrel-1.1.5/lib/mongrel.rb:285:in new</p><p>[GEM_ROOT]/gems/mongrel-1.1.5/lib/mongrel.rb:285:in run</p><p>[GEM_ROOT]/gems/mongrel-1.1.5/lib/mongrel.rb:268:in initialize</p><p>[GEM_ROOT]/gems/mongrel-1.1.5/lib/mongrel.rb:268:in new</p><p>[GEM_ROOT]/gems/mongrel-1.1.5/lib/mongrel.rb:268:in run</p><p>[GEM_ROOT]/gems/rack-1.0.1/lib/rack/handler/mongrel.rb:34:in run</p><p>[GEM_ROOT]/gems/rails-2.3.5/lib/commands/server.rb:111:in </p><p>/usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in gem_original_require</p><p>/usr/local/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in require</p><p>script/server:3:in </p>
+</pre>
+
+
+    <p id='footer'>
+     <a href="http://github.com/neerajdotname/exception2db">Powered by exception2db</a>
+     <a href="http://github.com/neerajdotname/exception2db/issues">Report bug</a>
+    </p>
+  </div>  
+</body>
+</html>
+

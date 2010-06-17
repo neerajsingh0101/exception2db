@@ -1,13 +1,15 @@
-<table>
   <% @exception2dbs.each do |exception2db| 
         @doc = REXML::Document.new(exception2db.exception) %>
-    <tr>
-      <td>
+      <h2>
         <%= exception2db.created_at.strftime('%B %d, %Y %I:%M:%S %p') %>
-        <%= link_to REXML::XPath.first(@doc, '//notice/error/message/text()'), "/exception2db/#{exception2db.id}" %>
-      </td>
-    </tr>
+        <%= link_to REXML::XPath.first(@doc, 
+          '//notice/error/message/text()'), 
+          "/exception2db/#{exception2db.id}" %>
+      </h2>
   <% end %>
-</table>
+
+  <% if @exception2dbs.blank? %>
+    <h2>So far no exceptions. </h2>
+  <% end %>  
 
 <%= will_paginate @exception2dbs %>

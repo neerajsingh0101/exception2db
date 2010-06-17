@@ -23,9 +23,11 @@ class Exception2db::MainController < ApplicationController
   private
 
   def ensure_is_allowed_to_view
-    return true if Rails.env.development?
+    # not using Rails.env.development? because cucumber test was failing with Rails.env
+    # but worked with RAILS_ENV. need to investigate further. TODO
+    return true if RAILS_ENV == 'production'
     unless Exception2dbConfig.setting[:is_allowed_to_view].call(self)
-      render :text => '<h2>not authorized</h2>', :status => :unauthorized
+      render :text => '<h2>Not Authorized</h2>', :status => :unauthorized
     end
   end
 

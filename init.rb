@@ -15,9 +15,9 @@ end
 
 load_will_paginate
 
-require File.join(RAILS_ROOT,'vendor', 'plugins', 'exception2db', 'lib', 'exception2db', 'config.rb')
+require File.join(RAILS_ROOT, 'vendor', 'plugins', 'exception2db', 'lib', 'exception2db', 'config.rb')
 Exception2dbConfig.initialize_defaults
 
-require File.join(RAILS_ROOT,'vendor', 'plugins', 'exception2db', 'lib', 'exception2db', 'util.rb')
+require File.join(RAILS_ROOT, 'vendor', 'plugins', 'exception2db', 'lib', 'exception2db', 'util.rb')
 
 require 'rexml/document'

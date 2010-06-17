@@ -47,9 +47,9 @@ class AddException2dbTable < ActiveRecord::Migration
   
   def self.up
     create_table :exception2dbs do |t|
-      t.text :exception
+      t.text :exception, :null => false
 
-      t.timestamps
+      t.datetime :created_at, :null => false
     end
   end
 
@@ -82,7 +82,7 @@ or some other environment. Exceptions in development mode are ignored by hoptoad
 
 Go to a url that raises exception.
 
-Then visit "http://localhost:3000/exception2db":http://localhost:3000/exception2db .
+Then visit "http://localhost:3000/exception2db":http://localhost:3000/exception2db . If you are not seeing *not authorized* message then read the next section.
 
 If you are not seeing the logging of exception then please read "this article":http://neeraj.name/2010/04/23/I-am-not-seeing-hoptoad-messages.html .
 
@@ -98,5 +98,22 @@ Exception2dbConfig.set = {
 
 Above code assumes that you have <tt>admin_logged_in?</tt> method defined in <tt>application_controller.rb</tt> . The <tt>is_allowed_to_view</tt> key accepts a proc and controller is provided to you. So you can call any controller method.
 
+h2. How to run tests for this plugin
+
+h3. Running rspec tests
+
+Stand in the current directory and run following command. I assume that you have rspec already installed.
+
+<pre>
+spec spec
+</pre>
+
+h3. Running cucumber test
+
+Stand in the current directory and run following command. I assume you have cucumber already installed.
+
+<pre>
+cucumber
+</pre>
 
 Copyright (c) 2010 neerajdotname, released under the MIT license
