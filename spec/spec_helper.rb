@@ -58,7 +58,7 @@ require 'flexmock'
 gem 'redgreen', '= 1.2.2'
 require 'RedGreen'
 
-gem 'cucumber', '= 0.7.2'
+gem 'cucumber', '= 0.8.0'
 require 'cucumber'
 
 # for helper tests
