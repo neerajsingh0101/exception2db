@@ -1,3 +1,5 @@
+h2. This pluging does _not_ work with rails 3 yet.
+
 h2. Exception2db
 
 I love hoptoad. I especially like the ability to catch exceptions in rake tasks and have those exceptions logged at hoptoad using hoptoad_notifier.
