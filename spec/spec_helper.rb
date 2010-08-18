@@ -46,7 +46,7 @@ ActiveRecord::Migrator.migrate("#{rails_root}/db/migrate")
 gem 'shoulda', '= 2.10.2'
 require 'shoulda'
 
-gem 'will_paginate', '= 2.3.11'
+gem 'will_paginate', '= 2.3.12'
 require 'will_paginate'
 
 gem 'factory_girl', '= 1.2.4'
@@ -58,7 +58,7 @@ require 'flexmock'
 gem 'redgreen', '= 1.2.2'
 require 'RedGreen'
 
-gem 'cucumber', '= 0.8.0'
+gem 'cucumber', '= 0.8.5'
 require 'cucumber'
 
 # for helper tests
