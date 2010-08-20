@@ -54,7 +54,7 @@ Open the migration file and add following text
 Run migration <pre>rake db:migrate</pre> 
 
 
-h2. How to use it
+## How to use this gem ##
 
 Whenever there is an exception that exception will be logged to database. Remember all the hoptoad rules apply. It means no excpetion will be logged in development environment.
 
@@ -75,7 +75,7 @@ Then visit "http://localhost:3000/exception2db":http://localhost:3000/exception2
 
 If you are not seeing the logging of exception then please read "this article":http://neeraj.name/2010/04/23/I-am-not-seeing-hoptoad-messages.html .
 
-h2. Configuring security
+##  Configuring security ##
 
 By default no security check is performed while visiting "http://localhost:3000/exception2db":http://localhost:3000/exception2db in development mode. In other environment a security check is done. At the bottom of <tt>config/initializers/exception2db.rb</tt> add something like this to configure security settings.
 
@@ -85,15 +85,15 @@ By default no security check is performed while visiting "http://localhost:3000/
 
 Above code assumes that you have <tt>admin_logged_in?</tt> method defined in <tt>application_controller.rb</tt> . The <tt>is_allowed_to_view</tt> key accepts a proc and controller is provided to you. So you can call any controller method.
 
-h2. How to run tests for this plugin
+##  How to run tests for this plugin ##
 
-h3. Running rspec tests
+### Running rspec tests ###
 
 Stand in the current directory and run following command. I assume that you have rspec already installed.
 
     spec spec
 
-h3. Running cucumber test
+### Running cucumber test ###
 
 Stand in the current directory and run following command. I assume you have cucumber already installed.
 
