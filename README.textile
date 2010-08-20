@@ -9,7 +9,7 @@ Instead of sending the information to hoptoad this plugin ensures that informati
 This plugin has been tested with Rails 2.3.5 .
 
 h2. I am using Rails 3. 
-If you are using Rails 3 then install this as a gem. All you need to do it add following line to Gemfile.
+If you are using Rails 3 then follow the instructions mentioned below. If you are using 
 
 <pre>
 gem 'exception2db'
