@@ -1,76 +1,55 @@
-h2. Exception2db
+# Exception2db #
 
 I love hoptoad. I especially like the ability to catch exceptions in rake tasks and have those exceptions logged at hoptoad using hoptoad_notifier.
 
-Currently I am working on a government project where hoptoad can't be used. Rather than writing code that captures all the information about exception, I am letting hoptoad_notifier do all the heavy lifting.
+Currently I am working on a government project where hoptoad can not be used. Rather than writing code that captures all the information about exception, I am letting hoptoad_notifier do all the heavy lifting.
 
 Instead of sending the information to hoptoad this plugin ensures that information is written to a database.
 
 This plugin has been tested with Rails 2.3.5 .
 
-h2. I am using Rails 3. 
-If you are using Rails 3 then follow the instructions mentioned below. If you are using 
+## I am using Rails 3 ##
 
-<pre>
-gem 'exception2db'
-</pre>
+If you are using Rails 3 then follow the instructions mentioned below. If you are using Rails 2.x  then follow the instructions [mentioned here]() .
 
-And you are done.
+## Add necessary gems  to Gem file ##
 
-h2. I am using Rails 2.
-If you are using Rails 2 then install this as a plugin as mentioned below.
+    gem 'exception2db'
+    gem 'hoptoad_notifier'
 
-h2. Installing the plugin
 
-Open <tt>config/environment.rb</tt> and add following line.
+## Setup configuration ## 
 
-<pre>
-config.gem 'hoptoad_notifier'
-</pre>
+Create a new file called <tt>~/config/intializers/exception2db.rb</tt> and following text to that file.
 
-Install hoptoad_notifier gem by executing 
-<pre>sudo rake gems:install</pre> 
+    HoptoadNotifier.configure do |config|
+    end
 
-vendor gem by executing <tt>rake gems:unpack GEM=hoptoad_notifier</tt> .
+    module HoptoadNotifier
+      def self.send_notice(data)
+        E2db.create(:exception => data.to_xml)
+      end
+    end
 
-Install exception2db plugin <pre>ruby script/plugin install git://github.com/neerajdotname/exception2db.git</pre>
+## Create a migration file ##
 
-Create an empty exception2db.rb file <pre>touch config/initializers/exception2db.rb</pre> 
-
-Add following text to <tt>config/initializers/exception2db.rb</tt> file
-
-<pre>
-HoptoadNotifier.configure do |config|
-end
-
-module HoptoadNotifier
-  def self.send_notice(data)
-    Exception2db.create(:exception => data.to_xml)
-  end
-end
-</pre>
-
-Generate migration <pre>ruby script/generate migration add_exception2db_table</pre> 
+Generate migration <pre>rails g migration add_exception2db_table</pre> 
 
 Open the migration file and add following text
 
-<pre>
-class AddException2dbTable < ActiveRecord::Migration
-  
-  def self.up
-    create_table :exception2dbs do |t|
-      t.text :exception, :null => false
+    class AddException2dbTable < ActiveRecord::Migration
+      def self.up
+        create_table :exception2dbs do |t|
+          t.text :exception, :null => false
 
-      t.datetime :created_at, :null => false
+          t.datetime :created_at, :null => false
+        end
+      end
+
+      def self.down
+        drop_table :exception2dbs
+      end
     end
-  end
-
-  def self.down
-    drop_table :exception2dbs
-  end
-
-end
-</pre>
 
 Run migration <pre>rake db:migrate</pre> 
 
@@ -83,11 +62,9 @@ To view exceptions visit "http://localhost:3000/exception2db":http://localhost:3
 
 In order to test this feature first add following line in <tt>application_controller.rb</tt> .
 
-<pre>
-def local_request?
- false
-end
-</pre>
+    def local_request?
+     false
+    end
 
 Then start the server in *non development* environment. Once again please start your server in production
 or some other environment. Exceptions in development mode are ignored by hoptoad. 
@@ -102,11 +79,9 @@ h2. Configuring security
 
 By default no security check is performed while visiting "http://localhost:3000/exception2db":http://localhost:3000/exception2db in development mode. In other environment a security check is done. At the bottom of <tt>config/initializers/exception2db.rb</tt> add something like this to configure security settings.
 
-<pre>
-Exception2dbConfig.set = {
-  :is_allowed_to_view => lambda {|controller| controller.send('admin_logged_in?') }
-}
-</pre>
+    Exception2dbConfig.set = {
+      :is_allowed_to_view => lambda {|controller| controller.send('admin_logged_in?') }
+    }
 
 Above code assumes that you have <tt>admin_logged_in?</tt> method defined in <tt>application_controller.rb</tt> . The <tt>is_allowed_to_view</tt> key accepts a proc and controller is provided to you. So you can call any controller method.
 
@@ -116,16 +91,13 @@ h3. Running rspec tests
 
 Stand in the current directory and run following command. I assume that you have rspec already installed.
 
-<pre>
-spec spec
-</pre>
+    spec spec
 
 h3. Running cucumber test
 
 Stand in the current directory and run following command. I assume you have cucumber already installed.
 
-<pre>
-cucumber
-</pre>
+    cucumber
+
 
 Copyright (c) 2010 neerajdotname, released under the MIT license
