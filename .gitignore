@@ -1,3 +1,4 @@
 **/*.log
 test/rails_root/log/*.log
 capybara-*.html
+pkg

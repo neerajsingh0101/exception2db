@@ -12,15 +12,11 @@ Gem::Specification.new do |s|
   s.date = %q{2010-08-20}
   s.description = %q{Store exceptions in local datbase using Hoptoad API}
   s.email = %q{neerajdotname@gmail.com}
-  s.extra_rdoc_files = [
-    "README.textile"
-  ]
   s.files = [
     "MIT-LICENSE",
-     "README.textile",
      "Rakefile",
      "app/controllers/exception2db/main_controller.rb",
-     "app/models/exception2db.rb",
+     "app/models/e2db.rb",
      "app/views/exception2db/main/index.html.erb",
      "app/views/exception2db/main/show.html.erb",
      "app/views/layouts/exception2db.html.erb",
