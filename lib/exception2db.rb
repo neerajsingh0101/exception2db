@@ -8,6 +8,12 @@ rescue LoadError => e
   )
 end
 
+module Exception2db
+  class E2db < ActiveRecord::Base
+    #
+  end
+end
+
 if Rails.version >= '3.0'
   require 'exception2db/railtie'
 else
@@ -18,4 +24,4 @@ require 'exception2db/config.rb'
 require 'exception2db/util.rb'
 require 'rexml/document'
 
-Exception2db::Config.initialize_defaults
+Exception2dbConfig.initialize_defaults

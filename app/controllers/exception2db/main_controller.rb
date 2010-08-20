@@ -7,14 +7,14 @@ class Exception2db::MainController < ApplicationController
   before_filter :ensure_is_allowed_to_view
 
   def index
-    @exception2dbs = Exception2db.paginate(:page => params[:page], :order => 'created_at desc')
+    @exception2dbs = E2db.paginate(:page => params[:page], :order => 'created_at desc')
     respond_to do |format|
       format.html
     end
   end
 
   def show
-    @record = Exception2db.find(params[:id])
+    @record = E2db.find(params[:id])
     respond_to do |format|
       format.html
     end

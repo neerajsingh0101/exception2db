@@ -1,4 +1,5 @@
-class Exception2db < ActiveRecord::Base
+class E2db < ActiveRecord::Base
+  set_table_name 'exception2dbs'
 
   validates_presence_of :exception
 

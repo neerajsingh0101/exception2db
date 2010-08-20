@@ -4,7 +4,7 @@ Rails.application.routes.draw do |map|
 
     edb.with_options :controller => 'main' do |m|
       m.index                       '/',                                   :action => 'index'
-      m.show                        '/:id',                                :action => 'show'
+      m.show                        ':id',                                :action => 'show'
     end
 
   end
