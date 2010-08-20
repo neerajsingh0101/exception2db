@@ -6,11 +6,9 @@ Currently I am working on a government project where hoptoad can not be used. Ra
 
 Instead of sending the information to hoptoad this plugin ensures that information is written to a database.
 
-This plugin has been tested with Rails 2.3.5 .
-
 ## I am using Rails 3 ##
 
-If you are using Rails 3 then follow the instructions mentioned below. If you are using Rails 2.x  then follow the instructions [mentioned here]() .
+If you are using Rails 3 then follow the instructions mentioned below. If you are using Rails 2.x  then follow the instructions [mentioned here](http://github.com/neerajdotname/exception2db) .
 
 ## Add necessary gems  to Gem file ##
 
@@ -20,7 +18,7 @@ If you are using Rails 3 then follow the instructions mentioned below. If you ar
 
 ## Setup configuration ## 
 
-Create a new file called <tt>~/config/intializers/exception2db.rb</tt> and following text to that file.
+Create a new file called <tt>~/config/intializers/exception2db.rb</tt> and add following text to that file.
 
     HoptoadNotifier.configure do |config|
     end
@@ -58,7 +56,7 @@ Run migration <pre>rake db:migrate</pre>
 
 Whenever there is an exception that exception will be logged to database. Remember all the hoptoad rules apply. It means no excpetion will be logged in development environment.
 
-To view exceptions visit "http://localhost:3000/exception2db":http://localhost:3000/exception2db .
+To view exceptions visit [http://localhost:3000/exception2db](http://localhost:3000/exception2db) .
 
 In order to test this feature first add following line in <tt>application_controller.rb</tt> .
 
@@ -71,13 +69,13 @@ or some other environment. Exceptions in development mode are ignored by hoptoad
 
 Go to a url that raises exception.
 
-Then visit "http://localhost:3000/exception2db":http://localhost:3000/exception2db . If you are not seeing *not authorized* message then read the next section.
+Then visit [http://localhost:3000/exception2db](http://localhost:3000/exception2db) . If you are not seeing *not authorized* message then read the next section.
 
-If you are not seeing the logging of exception then please read "this article":http://neeraj.name/2010/04/23/I-am-not-seeing-hoptoad-messages.html .
+If you are not seeing the logging of exception then please [read this article](http://neeraj.name/2010/04/23/I-am-not-seeing-hoptoad-messages.html) .
 
 ##  Configuring security ##
 
-By default no security check is performed while visiting "http://localhost:3000/exception2db":http://localhost:3000/exception2db in development mode. In other environment a security check is done. At the bottom of <tt>config/initializers/exception2db.rb</tt> add something like this to configure security settings.
+By default no security check is performed while visiting [http://localhost:3000/exception2db](http://localhost:3000/exception2db) in development mode. In other environment a security check is done. At the bottom of <tt>config/initializers/exception2db.rb</tt> add something like this to configure security settings.
 
     Exception2dbConfig.set = {
       :is_allowed_to_view => lambda {|controller| controller.send('admin_logged_in?') }
