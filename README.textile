@@ -1,6 +1,6 @@
 h2. This pluging works with Rails 3
 
-This plugin works with Rails 3. Please follow the [instruction mentioned here](http://github.com/neerajdotname/exception2db/tree/rails3_gem) . If you have any problem then please [create an issue](http://github.com/neerajdotname/exception2db/issues). Also note that all the Rails 3 work is happening in a branch called <tt>rails3_gem</tt> if you want to look at source code. The <tt>master</tt> branch is for Rails 2.x work.
+This plugin works with Rails 3. Please follow the "instruction mentioned here":http://github.com/neerajdotname/exception2db/tree/rails3_gem . If you have any problem then please "create an issue":http://github.com/neerajdotname/exception2db/issues . Also note that all the Rails 3 work is happening in a branch called <tt>rails3_gem</tt> if you want to look at source code. The <tt>master</tt> branch is for Rails 2.x work.
 
 h2. Exception2db
 
