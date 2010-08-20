@@ -1,5 +1,3 @@
-h2. This pluging does _not_ work with rails 3 yet.
-
 h2. Exception2db
 
 I love hoptoad. I especially like the ability to catch exceptions in rake tasks and have those exceptions logged at hoptoad using hoptoad_notifier.
@@ -9,6 +7,18 @@ Currently I am working on a government project where hoptoad can't be used. Rath
 Instead of sending the information to hoptoad this plugin ensures that information is written to a database.
 
 This plugin has been tested with Rails 2.3.5 .
+
+h2. I am using Rails 3. 
+If you are using Rails 3 then install this as a gem. All you need to do it add following line to Gemfile.
+
+<pre>
+gem 'exception2db'
+</pre>
+
+And you are done.
+
+h2. I am using Rails 2.
+If you are using Rails 2 then install this as a plugin as mentioned below.
 
 h2. Installing the plugin
 
