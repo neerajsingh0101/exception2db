@@ -9,7 +9,7 @@ rescue LoadError => e
 end
 
 if Rails.version >= '3.0'
-  require 'admin_data/railtie'
+  require 'exception2db/railtie'
 else
   raise "Please see documentation at http://github.com/neerajdotname/exception2db to find out how to use this gem with rails 2.3.x"
 end

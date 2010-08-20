@@ -62,8 +62,6 @@ Gem::Specification.new do |s|
      "test/rails_root/script/dbconsole",
      "test/rails_root/script/runner",
      "test/rails_root/script/server",
-     "test/rails_root/tmp/admin_data/validate_model/123456/testing.txt",
-     "test/rails_root/tmp/response.html",
      "test/rspec-rails/Contribute.rdoc",
      "test/rspec-rails/History.rdoc",
      "test/rspec-rails/License.txt",
