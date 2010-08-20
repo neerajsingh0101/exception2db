@@ -10,7 +10,7 @@ Instead of sending the information to hoptoad this plugin ensures that informati
 
 If you are using Rails 3 then follow the instructions mentioned below. If you are using Rails 2.x  then follow the instructions [mentioned here](http://github.com/neerajdotname/exception2db) .
 
-## Add necessary gems  to Gem file ##
+## Add necessary gems  to Gemfile ##
 
     gem 'exception2db'
     gem 'hoptoad_notifier'
